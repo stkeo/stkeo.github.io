@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.stkeo.hanip",
+      "sha256_cert_fingerprints": [
+        "97:D6:44:6B:8D:84:4F:80:99:5E:B6:BD:F4:FF:71:09:ED:E0:51:E0:92:76:55:00:1D:31:F1:C0:FA:3B:5A:BE"
+      ]
+    }
+  }
+]

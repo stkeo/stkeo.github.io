@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>한입 | 친구들과 나누는 식사 기록</title>
+  <meta name="description" content="친구 모임에 오늘 먹은 걸 사진 한 장과 별점 세 개로 남겨요. 한입에서 식사 기록을 나누고, 우리 모임의 맛집 순위와 월말 리포트를 확인해요.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FAFCFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101B2D" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/svg+xml" href="https://stkeo.github.io/hanip/icons/icon.svg">
+  <link rel="canonical" href="https://stkeo.github.io/">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --blue: #244BDB;
+      --blue-fill: #244BDB;
+      --blue-press: #1B3BB5;
+      --on-blue: #FFFFFF;
+      --bg: #FAFCFF;
+      --soft: #EEF3FC;
+      --ink: #172A3A;
+      --sub: #4F6173;
+      --line: #DCE4F2;
+      --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-padding-top: 100px; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    a {
+      color: inherit;
+      text-underline-offset: 4px;
+      scroll-margin-top: 100px;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 5px;
+    }
+
+    .container {
+      width: min(100% - 40px, 1040px);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      min-height: 76px;
+      padding-block: 12px;
+    }
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2em;
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .wordmark svg {
+      display: block;
+      flex: none;
+      width: 1em;
+      height: 1em;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 52px;
+      padding: 12px 24px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: var(--blue-fill);
+      color: var(--on-blue);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .button-small {
+      min-height: 44px;
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    .button:active { background: var(--blue-press); }
+
+    .hero {
+      padding-block: 76px 80px;
+      text-align: center;
+    }
+
+    .hero .wordmark { font-size: clamp(56px, 8vw, 80px); }
+
+    .hero-description {
+      max-width: 680px;
+      margin: 28px auto 0;
+      line-height: 1.8;
+    }
+
+    .hero .button {
+      min-width: 180px;
+      margin-top: 32px;
+    }
+
+    .features {
+      padding: 32px 24px;
+      border-radius: 24px;
+      background: var(--soft);
+    }
+
+    .features h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.4;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .feature-list li {
+      min-width: 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .feature-list h3 {
+      margin-bottom: 10px;
+      color: var(--blue);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.4;
+    }
+
+    .feature-list p {
+      color: var(--sub);
+      font-size: 15px;
+    }
+
+    .site-footer { padding-block: 40px 32px; }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .site-footer a {
+      display: inline-flex;
+      align-items: center;
+      min-width: 44px;
+      min-height: 44px;
+      padding-block: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      text-decoration: none;
+    }
+
+    .contact {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      column-gap: 8px;
+      margin-top: 8px;
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    .contact a {
+      max-width: 100%;
+      text-decoration: underline;
+    }
+
+    @media (hover: hover) {
+      .button:hover { background: var(--blue-press); }
+      .site-footer a:hover {
+        color: var(--blue);
+        text-decoration: underline;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .hero { padding-block: 100px; }
+      .features { padding: 40px; }
+      .feature-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 1024px) {
+      .hero { padding-block: 112px; }
+      .feature-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --blue: #8BA8FF;
+        --blue-fill: #365CDA;
+        --blue-press: #2E4FC0;
+        --bg: #101B2D;
+        --soft: #1F2F4A;
+        --ink: #F4F7FF;
+        --sub: #AAB7CC;
+        --line: #2B3A55;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <span class="wordmark">
+        한입
+        <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+          <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.8" />
+          <circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+      </span>
+      <a class="button button-small" href="https://stkeo.github.io/hanip/" aria-label="한입 앱으로 이동">앱으로 이동</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" aria-labelledby="hero-title">
+      <h1 class="wordmark" id="hero-title">
+        한입
+        <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+          <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.8" />
+          <circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+      </h1>
+      <p class="hero-description">친구 모임에 오늘 먹은 걸 사진 한 장과 별점 세 개로 남겨요</p>
+      <a class="button" href="https://stkeo.github.io/hanip/" aria-label="한입 웹에서 열기">웹에서 열기</a>
+    </section>
+
+    <section class="features container" aria-labelledby="features-title">
+      <h2 id="features-title">한입에서 할 수 있는 일</h2>
+      <ul class="feature-list" role="list">
+        <li>
+          <h3>기록 올리기</h3>
+          <p>직접 찍은 사진 한 장에 맛, 가성비, 추천 별점을 각각 남겨요.</p>
+        </li>
+        <li>
+          <h3>친구 모임</h3>
+          <p>친구들과 모임을 만들고 서로의 식사 기록을 나눠요.</p>
+        </li>
+        <li>
+          <h3>맛집 순위</h3>
+          <p>모임에 쌓인 별점으로 친구들이 좋아한 가게를 살펴봐요.</p>
+        </li>
+        <li>
+          <h3>월말 리포트</h3>
+          <p>한 달 동안 남긴 기록을 모아 이번 달의 식사를 돌아봐요.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <nav aria-label="이용 안내">
+      <ul class="footer-links" role="list">
+        <li><a href="https://stkeo.github.io/hanip/privacy.html">개인정보 처리방침</a></li>
+        <li><a href="https://stkeo.github.io/hanip/terms.html">이용 규칙</a></li>
+        <li><a href="https://stkeo.github.io/hanip/account-delete.html">계정 삭제 안내</a></li>
+      </ul>
+    </nav>
+    <p class="contact">문의 <a href="mailto:govl5088@gmail.com">govl5088@gmail.com</a></p>
+  </footer>
+</body>
+</html>
